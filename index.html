@@ -319,11 +319,17 @@
             }
 
             await wait(500);
+            document.cookie = "last_visit=true; max-age=300; path=/";
 
             await revealScreen();
-        }
 
-        window.onload = startBootSequence;
+        }
+        
+        if (document.cookie.split(';').some((item) => item.trim().startsWith('last_visit='))) {
+            window.onload = revealScreen;
+        } else {
+            window.onload = startBootSequence;
+        }
 
     </script>
 </body>
