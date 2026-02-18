@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="tr">
   <head>
@@ -24,7 +23,7 @@
         background-color: #000;
         color: #e9e9e9;
         font-family: 'Roboto', sans-serif;
-        overflow: hidden; /* Dışarıdan scroll çıkmasın */
+        overflow: hidden;
       }
 
       main {
@@ -38,6 +37,17 @@
 
       h1 {
         font-size: 3rem;
+        margin-top: 0;
+        text-align: center; /* Başlık Ortala */
+      }
+      
+      h2 {
+        margin-top: 1rem;
+        text-align: center; /* Başlık Ortala */
+      }
+
+      p {
+        text-align: center; /* Yazı Ortala */
       }
 
       footer {
@@ -53,20 +63,18 @@
       }
 
       ::-webkit-scrollbar {
-        width: 12px;
-        height: 12px;
+        width: 8px;
+        height: 8px;
       }
 
       ::-webkit-scrollbar-thumb {
-        background: var(--scrollbar-foreground);
         background: rgb(63, 63, 63);
         border-radius: 999px;
-        border: 3px solid transparent;
+        border: 2px solid transparent;
         background-clip: padding-box;
       }
 
       ::-webkit-scrollbar-track {
-        background: var(--scrollbar-background);
         background: transparent;
       }
 
@@ -85,6 +93,11 @@
         font-weight: bold;
       }
 
+      #terminal pre {
+        text-align: left;
+        margin: 0;
+      }
+
       .logs {
         margin-bottom: 5px;
         font-size: 16px;
@@ -101,13 +114,8 @@
       }
 
       @keyframes blink {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0;
-        }
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
       }
 
       .grid-overlay {
@@ -124,7 +132,6 @@
         background-color: #000;
       }
 
-      /* 1. Ana kapsayıcı: Her şeyi ekranın tam ortasına toplar */
       #main-site {
         display: flex;
         flex-direction: column;
@@ -136,28 +143,31 @@
         padding: 20px;
       }
 
-      /* 2. İçerik Kutusu: Bu kutu ortada durur ama içindekiler sola yaslıdır */
       #main-site > div {
         width: 100%;
-        max-width: 600px; /* Kutunun genişliği (isteğine göre değiştirebilirsin) */
+        max-width: 1200px; 
         display: flex;
         flex-direction: column;
-        align-items: flex-start; /* İÇERİKLERİ SOLA DAYAR */
-        text-align: left; /* Metinleri sola dayar */
+        align-items: center;
+        text-align: center; 
       }
 
-      /* 3. GitHub Takvimi: Kutunun dışına veya içine koysan da taşmaz */
-      #main-site img {
-        max-width: 100%;
+      .calendar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-top: 20px;
+      }
+
+      .calendar img {
+        width: 100%;
         height: auto;
-        margin: 20px 0; /* Üstten ve alttan boşluk */
-        align-self: center; /* Resim kutu içinde olsa bile kendi başına ortalansın dersen */
+        max-width: 1000px;
       }
 
-      /* 4. Tablo ayarı: Sola dayalı olması için */
       .contact-table {
-        margin-left: 0;
-        margin-right: auto;
+        margin: 0 auto;
         border-spacing: 0;
       }
 
@@ -180,7 +190,7 @@
       }
 
       .contact-table td {
-        padding: 0;
+        padding: 10px;
         border: none;
       }
 
@@ -214,44 +224,46 @@
       }
 
       @media (max-width: 600px) {
-        pre {
-          font-size: x-small;
-        }
-      }
-      @media (max-width: 488px) {
-        pre {
-          font-size: 8px;
-        }
-      }
-      @media (max-width: 400px) {
-        pre {
-          font-size: 7px;
-        }
-      }
-      @media (max-width: 500px) {
-        .contact-table {
-          width: 90%;
-          margin: 15px auto;
-        }
+        pre { font-size: x-small; }
 
-        .contact-table tr {
-          display: block;
-        }
-
+        .contact-table { width: 100%; }
+        .contact-table tr { display: block; }
         .contact-table td {
           display: block;
           width: 100%;
+          padding: 0;
           margin-bottom: 10px;
         }
-
         .contact {
-          height: 60px;
+          width: 100%;
+          height: 50px;
           font-size: 16px;
         }
-        h1,
-        h2 {
-          margin-left: 0;
-          padding-left: 0;
+
+        .calendar {
+          width: 100%;
+          display: block;
+        }
+
+        .calendar h2 {
+          text-align: center; 
+        }
+
+        .calendar-scroll {
+          width: 100%;
+          overflow-x: auto;
+          padding-bottom: 10px;
+          display: flex;
+          justify-content: center;
+        }
+
+        .calendar-scroll img {
+          min-width: 800px; 
+          max-width: none;
+        }
+
+        .calendar-scroll::-webkit-scrollbar {
+            display: none;
         }
       }
     </style>
@@ -270,75 +282,59 @@
 .JMML. .JMM.`Mbmmd'.JMML  JMML.YMMMMMb `Moo9^Yo..JMML  JMML. `"bmmd"'   P"Ybmmd"
                               6'     dP
                               Ybmmmd'
-                </pre
-          >
+          </pre>
         </div>
         <span class="cursor"></span>
-
         <div id="grid-layer" class="grid-overlay"></div>
       </div>
 
       <div id="main-site" class="crt-effect">
         <div>
           <h1>Rengan</h1>
+          
           <div>
             <h2>Interests</h2>
             <p>Rust, C#, DM, JS, REACT, SQL, UNITY</p>
           </div>
+
           <div>
             <h2>Contact</h2>
             <table class="contact-table">
               <tr>
                 <td>
-                  <a class="contact" href="https://github.com/Rengan02"
-                    ><i class="fa-brands fa-github"></i>Github</a
-                  >
+                  <a class="contact" href="https://github.com/Rengan02"><i class="fa-brands fa-github"></i>Github</a>
                 </td>
                 <td>
-                  <a
-                    class="contact"
-                    href="https://discord.com/channels/@me/368695088718544896"
-                    ><i class="fa-brands fa-discord"></i>Discord</a
-                  >
+                  <a class="contact" href="https://discord.com/channels/@me/368695088718544896"><i class="fa-brands fa-discord"></i>Discord</a>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <a class="contact" href="https://www.instagram.com/tlhaltndg/"
-                    ><i class="fa-brands fa-instagram"></i>Instagram</a
-                  >
+                  <a class="contact" href="https://www.instagram.com/tlhaltndg/"><i class="fa-brands fa-instagram"></i>Instagram</a>
                 </td>
                 <td>
-                  <a class="contact" href="https://www.linkedin.com/in/rengan07"
-                    ><i class="fa-brands fa-linkedin"></i>Linkedin</a
-                  >
+                  <a class="contact" href="https://www.linkedin.com/in/rengan07"><i class="fa-brands fa-linkedin"></i>Linkedin</a>
                 </td>
               </tr>
             </table>
           </div>
-          <div>
+
+          <div class="calendar">
             <h2>Github Activity</h2>
-            <img
-              src="https://ghchart.rshah.org/rengan02.svg"
-              alt="Github Calendar"
-            />
+            <div class="calendar-scroll">
+               <img src="https://ghchart.rshah.org/rengan02.svg" alt="Github Calendar" />
+            </div>
           </div>
+
         </div>
       </div>
+      
       <footer>© 2026 Rengan.</footer>
     </main>
     <script>
       const commands = [
-        {
-          text: 'C:\\Users\\rengan> start.bat',
-          wait: 700,
-          noBracket: true,
-        },
-        {
-          text: 'Listening port at 3000',
-          wait: 300,
-          noBracket: true,
-        },
+        { text: 'C:\\Users\\rengan> start.bat', wait: 700, noBracket: true },
+        { text: 'Listening port at 3000', wait: 300, noBracket: true },
       ];
 
       const terminal = document.getElementById('terminal');
@@ -404,11 +400,7 @@
         await revealScreen();
       }
 
-      if (
-        document.cookie
-          .split(';')
-          .some((item) => item.trim().startsWith('last_visit='))
-      ) {
+      if (document.cookie.split(';').some((item) => item.trim().startsWith('last_visit='))) {
         window.onload = revealScreen;
       } else {
         window.onload = startBootSequence;
