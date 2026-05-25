@@ -93,11 +93,6 @@
         font-weight: bold;
       }
 
-      #terminal pre {
-        text-align: left;
-        margin: 0;
-      }
-
       .logs {
         margin-bottom: 5px;
         font-size: 16px;
@@ -268,19 +263,6 @@
   <body>
     <main>
       <div id="boot">
-        <div id="terminal">
-          <pre>
-`7MM"""Mq.                                                   .g8""8q.    .M"""bgd
-  MM   `MM.                                                .dP'    `YM. ,MI    "Y
-  MM   ,M9  .gP"Ya `7MMpMMMb.  .P"Ybmmm ,6"Yb.  `7MMpMMMb. dM'      `MM `MMb.
-  MMmmdM9  ,M'   Yb  MM    MM :MI  I8  8)   MM    MM    MM MM        MM   `YMMNq.
-  MM  YM.  8M""""""  MM    MM  WmmmP"   ,pm9MM    MM    MM MM.      ,MP .     `MM
-  MM   `Mb.YM.    ,  MM    MM 8M       8M   MM    MM    MM `Mb.    ,dP' Mb     dM
-.JMML. .JMM.`Mbmmd'.JMML  JMML.YMMMMMb `Moo9^Yo..JMML  JMML. `"bmmd"'   P"Ybmmd"
-                              6'     dP
-                              Ybmmmd'
-          </pre>
-        </div>
         <span class="cursor"></span>
         <div id="grid-layer" class="grid-overlay"></div>
       </div>
@@ -290,8 +272,13 @@
           <h1>Rengan</h1>
           
           <div>
-            <h2>Interests</h2>
-            <p>Rust, C#, DM, JS, REACT, SQL, UNITY</p>
+            <h3>Frameworks & Tools</h4>
+            <p>NodeJS, BunJS, NextJS, React, Tailwind, Unity, SQL, Git</p>
+          </div>
+
+          <div>
+            <h3>Languages</h4>
+            <p>C#, JS, TS, DM</p>
           </div>
 
           <div>
@@ -329,29 +316,12 @@
       <footer>© 2026 Rengan.</footer>
     </main>
     <script>
-      const commands = [
-        { text: 'C:\\Users\\rengan> start.bat', wait: 700, noBracket: true },
-        { text: 'Listening port at 3000', wait: 300, noBracket: true },
-      ];
-
-      const terminal = document.getElementById('terminal');
       const boot = document.getElementById('boot');
       const mainSite = document.getElementById('main-site');
       const gridLayer = document.getElementById('grid-layer');
 
       function wait(ms) {
         return new Promise((resolve) => setTimeout(resolve, ms));
-      }
-
-      async function typeText(text) {
-        const line = document.createElement('div');
-        line.className = 'logs';
-        terminal.appendChild(line);
-
-        for (let i = 0; i < text.length; i++) {
-          line.textContent += text.charAt(i);
-          await wait(Math.random() + 15);
-        }
       }
 
       async function revealScreen() {
@@ -373,35 +343,17 @@
         }
 
         boot.style.backgroundColor = 'transparent';
-        terminal.style.display = 'none';
         mainSite.style.display = 'flex';
 
         for (let i = 0; i < cells.length; i++) {
           cells[i].style.backgroundColor = 'transparent';
-          await wait(10);
+          await wait(1);
         }
 
         boot.remove();
       }
 
-      async function startBootSequence() {
-        for (let i = 0; i < commands.length; i++) {
-          var cmd = commands[i];
-          await typeText(`${!cmd['noBracket'] ? '> ' : ''}` + cmd['text']);
-          await wait(cmd['wait']);
-        }
-
-        await wait(500);
-        document.cookie = 'last_visit=true; max-age=300; path=/';
-
-        await revealScreen();
-      }
-
-      if (document.cookie.split(';').some((item) => item.trim().startsWith('last_visit='))) {
-        window.onload = revealScreen;
-      } else {
-        window.onload = startBootSequence;
-      }
+      window.onload = revealScreen;
     </script>
   </body>
 </html>
